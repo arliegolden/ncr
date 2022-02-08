@@ -1,0 +1,45 @@
+# To be Inserted into any project if you need debug functions. Read documentation for more info.
+
+
+    Public Function EncyptionDebugSetup()
+        Console.WriteLine("Encryption setup should be hidden for non-debug versions.")
+        Console.ReadKey()
+        Console.WriteLine()
+
+        Dim encryptKey As String = "7XuLGnJrT9d64Hrpw2aPIGNttk5QLdwo49U4eM9C4F5nwCt5Mq3tG9E8R7pHEud8tFUEDnSGMifGTMgAM3QTraTKIDRrTmtNkSPs" 'EncryptionKey is useful for other methods of verification of software authenticity
+        Dim userKey As String = "firstIterationOfKey" ' Can be any value, or left with no value at all. this can be used as the default userKey for managing permissions.
+        Dim uncryptedUserKey As String
+        Dim encryptedUserKey As String 'NOTE: for releases of software with this basic encryption, do not use a seperate variable for the encryption. traces of original key can lead to a data breach if sensitive info is passed!
+
+        Console.WriteLine("EncryptKey") ' Begins Testing basic encryption of one variable, changing as it goes.
+        Console.WriteLine(encryptKey)
+        Console.WriteLine()
+        Console.WriteLine("Encrypted EncryptKey")
+        Console.WriteLine(Encrypt(encryptKey)) 'This is a temporary method of showing an encrypted key, but only once unless you want to repeat the encryption method. To use this key in software please save it to a secure variable or itself.
+        Console.WriteLine()
+
+        Console.WriteLine("Input the userKey for verification") ' A more advanced verification of cypher authentitcity and values
+        userKey = Console.ReadLine()
+        Console.WriteLine()
+        Console.WriteLine("User inputted UserKey") ' Any character should be able to be Encrypted, if not please modify the cypher code.
+        Console.WriteLine(userKey)
+        Console.WriteLine()
+        Console.WriteLine("Encrypt the userKey to the encryptedUserKey variable") 'Encrypt the string passed from the user. For actual basic usernames, assign a userkey to usernames and passwords, so verification is supported in the future and support per-user
+        encryptedUserKey = Encrypt(userKey) ' Assign a value to the otherwise unused encryptedUserKey variable. This isnt a secure way of utilising auth tokens, etc. Instead rewrite the original 
+        Console.WriteLine()
+        Console.WriteLine(encryptedUserKey)
+        Console.WriteLine()
+        Console.WriteLine("Decrypt the encrypted userkey to verify that decryption works.")
+        uncryptedUserKey = Decrypt(encryptedUserKey) ' This should always return the value of the inputted userKey at the begining of userKey testing! If it does not there is something wrong with the code of most likely the decrypt() and encrypt() functions .
+        Console.WriteLine(uncryptedUserKey)
+        Console.WriteLine()
+        If userKey = uncryptedUserKey Then
+            Console.WriteLine("It works! The computer has verified the strings are the same as when they started.")
+        Else
+            Console.WriteLine("Fatal Error! The string is not the same as the beginning string! This must be fixed ASAP, please flag an issue")
+        End If
+
+        Console.WriteLine()
+
+        Console.WriteLine("Encrytion Debug finished.") 'If any values look off or something isnt working, you may have to look at documentation based on a cypher of choice, or modify the code of both decrypt() and encrypt().
+   End Function

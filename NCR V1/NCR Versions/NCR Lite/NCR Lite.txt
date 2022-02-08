@@ -1,0 +1,17 @@
+	Public Function Encrypt(strInput As String)
+        	Dim n As Integer, i As Integer
+        	n = 13
+        	For i = 1 To Len(strInput)
+            		Mid(strInput, i, 1) = Chr(Asc(Mid(strInput, i, 1)) + n)
+        	Next i
+        	Encrypt = strInput
+    	End Function
+
+    	Public Function Decrypt(strInput As String)
+        	Dim n As Integer, i As Integer
+        	n = 13
+        	For i = 1 To Len(strInput)
+            		Mid(strInput, i, 1) = Chr(Asc(Mid(strInput, i, 1)) - n)
+        	Next i
+        	Decrypt = strInput
+    	End Function
